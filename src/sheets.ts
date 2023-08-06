@@ -1,0 +1,5 @@
+const spreadSheet: GoogleAppsScript.Spreadsheet.Spreadsheet  = SpreadsheetApp.getActiveSpreadsheet()
+const GanttSheet: GoogleAppsScript.Spreadsheet.Sheet | null = spreadSheet.getSheetByName("gantt")
+const ProjectsSheet: GoogleAppsScript.Spreadsheet.Sheet | null = spreadSheet.getSheetByName("projects")
+const SchedulesSheet: GoogleAppsScript.Spreadsheet.Sheet | null = spreadSheet.getSheetByName("Schedules")
+const EditSheet: GoogleAppsScript.Spreadsheet.Sheet | null = spreadSheet.getSheetByName("edit")
