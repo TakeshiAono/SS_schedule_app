@@ -11,9 +11,17 @@
   "license": "ISC",
   "devDependencies": {
     "@types/google-apps-script": "^1.0.66",
-    "esbuild": "^0.18.18",
+    "esbuild": "^0.19.0",
     "esbuild-gas-plugin": "^0.6.0",
+    "gas-webpack-plugin": "^2.5.0",
+    "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "gts": "^5.0.0"
   }
 }

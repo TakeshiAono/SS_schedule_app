@@ -1,5 +1,5 @@
 import { TableColumnNames, ProjectsTableColumnTypes } from "../types/table";
-//import { ProjectsSheet } from "../sheets";
+import { ProjectsSheet } from "../sheets";
 
 export default class ProjectsModel {
   initializationRowNumber = 3;
@@ -36,7 +36,7 @@ export default class ProjectsModel {
     return rowCounter
   }
 
-  #getValue(row, column) {
-    return ProjectsSheet.getRange(row, column).getValue()
+  #getValue(row: number, column: number) {
+    return ProjectsSheet?.getRange(row, column).getValue()
   }
 }

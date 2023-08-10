@@ -1,1 +1,1 @@
-const RegisterEditRange = "A3:B3"
+export const RegisterEditRange = "A3:B3"

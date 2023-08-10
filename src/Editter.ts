@@ -1,4 +1,4 @@
-//import { EditSheet } from "./sheets";
+import { EditSheet } from "./sheets";
 import { RegisterEditRange } from "./EditTablePosConsts"
 
 export default class Editor {

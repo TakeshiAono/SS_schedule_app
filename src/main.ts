@@ -5,7 +5,7 @@ import Editor from "./Editter";
 
 // const editor = new Editor()
 
-const record: ProjectsTableColumnTypes = {
+export const record: ProjectsTableColumnTypes = {
   id: 1,
   name: "testProject",
   finalDate: new Date(Date.now()),
@@ -14,7 +14,7 @@ const record: ProjectsTableColumnTypes = {
   createdAt: new Date(Date.now()),
 }
 
-const registerProjectRecord = () => {
+export const registerProjectRecord = () => {
   const record: [string, string] = Editor.getProjectEditRecord()[0]
   const date = new Date(record[1])
   date.setDate(date.getDate() + 1)
