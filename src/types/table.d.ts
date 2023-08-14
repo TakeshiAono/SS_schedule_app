@@ -8,3 +8,7 @@ export type ProjectsTableColumnTypes = {
   updateAt: Date,
   createdAt: Date,
 }
+
+export type ProjectInput = [string, string]
+
+export type InputData = string[]

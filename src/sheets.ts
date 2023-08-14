@@ -1,4 +1,4 @@
-export const spreadSheet: GoogleAppsScript.Spreadsheet.Spreadsheet  = SpreadsheetApp.getActiveSpreadsheet()
+export const spreadSheet: GoogleAppsScript.Spreadsheet.Spreadsheet | null  = SpreadsheetApp.getActiveSpreadsheet()
 export const GanttSheet: GoogleAppsScript.Spreadsheet.Sheet | null = spreadSheet.getSheetByName("gantt")
 export const ProjectsSheet: GoogleAppsScript.Spreadsheet.Sheet | null = spreadSheet.getSheetByName("projects")
 export const SchedulesSheet: GoogleAppsScript.Spreadsheet.Sheet | null = spreadSheet.getSheetByName("Schedules")

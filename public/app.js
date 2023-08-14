@@ -1,12 +1,13 @@
-function onEdit() {
-}
-// スプレッドシートの編集トリガーとしても使える
-function fuga() {
-}
 function registerProjectRecord() {
+}
+function registerUserRecord() {
 }
 // const editor = new Editor()
 function record() {
+}
+function registerProjectRecord() {
+}
+function registerScheduleRecord() {
 }
 function EditSheet() {
 }
@@ -51,6 +52,12 @@ class Editor {
     static getProjectEditRecord() {
         return sheets_1.EditSheet?.getRange(EditTablePosConsts_1.RegisterEditRange).getValues();
     }
+    static getScheduleEditRecord() {
+        // return EditSheet?.getRange(RegisterEditRange).getValues()
+    }
+    static getUserEditRecord() {
+        // return EditSheet?.getRange(userEditRange).getValues()
+    }
 }
 exports["default"] = Editor;
 
@@ -65,8 +72,8 @@ exports["default"] = Editor;
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.registerProjectRecord = exports.record = void 0;
-const ProjectModel_1 = __webpack_require__(/*! ./model/ProjectModel */ "./src/model/ProjectModel.ts");
+exports.registerUserRecord = exports.registerScheduleRecord = exports.registerProjectRecord = exports.record = void 0;
+const Project_1 = __webpack_require__(/*! ./model/Project */ "./src/model/Project.ts");
 const Editter_1 = __webpack_require__(/*! ./Editter */ "./src/Editter.ts");
 // const editor = new Editor()
 exports.record = {
@@ -82,19 +89,39 @@ const registerProjectRecord = () => {
     const date = new Date(record[1]);
     date.setDate(date.getDate() + 1);
     record[1] = date.toLocaleDateString();
-    const projectsModel = new ProjectModel_1.default();
+    const projectsModel = new Project_1.default();
     projectsModel.create(record);
 };
 exports.registerProjectRecord = registerProjectRecord;
-__webpack_require__.g.registerProjectRecord = __webpack_exports__.registerProjectRecord;
+const registerScheduleRecord = () => {
+    const record = Editter_1.default.getScheduleEditRecord()[0];
+    const date = new Date(record[1]);
+    date.setDate(date.getDate() + 1);
+    record[1] = date.toLocaleDateString();
+    const projectsModel = new Project_1.default();
+    projectsModel.create(record);
+};
+exports.registerScheduleRecord = registerScheduleRecord;
+const registerUserRecord = () => {
+    const record = Editter_1.default.getUserEditRecord()[0];
+    const date = new Date(record[1]);
+    date.setDate(date.getDate() + 1);
+    record[1] = date.toLocaleDateString();
+    const projectsModel = new Project_1.default();
+    projectsModel.create(record);
+};
+exports.registerUserRecord = registerUserRecord;
+__webpack_require__.g.registerUserRecord = __webpack_exports__.registerUserRecord;
 __webpack_require__.g.record = __webpack_exports__.record;
+__webpack_require__.g.registerProjectRecord = __webpack_exports__.registerProjectRecord;
+__webpack_require__.g.registerScheduleRecord = __webpack_exports__.registerScheduleRecord;
 
 /***/ }),
 
-/***/ "./src/model/ProjectModel.ts":
-/*!***********************************!*\
-  !*** ./src/model/ProjectModel.ts ***!
-  \***********************************/
+/***/ "./src/model/Model.ts":
+/*!****************************!*\
+  !*** ./src/model/Model.ts ***!
+  \****************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -103,20 +130,24 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _ProjectsModel_instances, _ProjectsModel_lastIndexNumber, _ProjectsModel_getValue;
+var _Model_instances, _Model_lastIndexNumber, _Model_getValue;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+// import { TableColumnNames } from "../types/table";
 const sheets_1 = __webpack_require__(/*! ../sheets */ "./src/sheets.ts");
-class ProjectsModel {
+// import { Store } from "./Store";
+class Model {
+    // public store: Store
     constructor() {
-        _ProjectsModel_instances.add(this);
+        _Model_instances.add(this);
         this.initializationRowNumber = 3;
-        this.addableRowNumber = __classPrivateFieldGet(this, _ProjectsModel_instances, "m", _ProjectsModel_lastIndexNumber).call(this);
+        // this.store = store
+        this.addableRowNumber = __classPrivateFieldGet(this, _Model_instances, "m", _Model_lastIndexNumber).call(this);
         //最初の入力時にはlastIdを0とする。
-        this.lastId = this.addableRowNumber === 3 ? 0 : __classPrivateFieldGet(this, _ProjectsModel_instances, "m", _ProjectsModel_getValue).call(this, this.addableRowNumber - 1, 1);
+        this.lastId = this.addableRowNumber === 3 ? 0 : __classPrivateFieldGet(this, _Model_instances, "m", _Model_getValue).call(this, this.addableRowNumber - 1, 1);
         this.willNewId = this.lastId + 1;
     }
     create(record) {
-        const addRowNum = __classPrivateFieldGet(this, _ProjectsModel_instances, "m", _ProjectsModel_lastIndexNumber).call(this);
+        const addRowNum = __classPrivateFieldGet(this, _Model_instances, "m", _Model_lastIndexNumber).call(this);
         sheets_1.ProjectsSheet?.getRange(addRowNum, 1, 1, 6).setValues([[
                 this.willNewId,
                 ...record,
@@ -127,16 +158,39 @@ class ProjectsModel {
         this.addableRowNumber = addRowNum + 1;
     }
 }
-_ProjectsModel_instances = new WeakSet(), _ProjectsModel_lastIndexNumber = function _ProjectsModel_lastIndexNumber() {
+_Model_instances = new WeakSet(), _Model_lastIndexNumber = function _Model_lastIndexNumber() {
     let rowCounter = this.initializationRowNumber;
-    while (__classPrivateFieldGet(this, _ProjectsModel_instances, "m", _ProjectsModel_getValue).call(this, rowCounter, 1) !== "") {
+    while (__classPrivateFieldGet(this, _Model_instances, "m", _Model_getValue).call(this, rowCounter, 1) !== "") {
         rowCounter++;
     }
     return rowCounter;
-}, _ProjectsModel_getValue = function _ProjectsModel_getValue(row, column) {
+}, _Model_getValue = function _Model_getValue(row, column) {
     return sheets_1.ProjectsSheet?.getRange(row, column).getValue();
 };
-exports["default"] = ProjectsModel;
+exports["default"] = Model;
+
+
+/***/ }),
+
+/***/ "./src/model/Project.ts":
+/*!******************************!*\
+  !*** ./src/model/Project.ts ***!
+  \******************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const Model_1 = __webpack_require__(/*! ./Model */ "./src/model/Model.ts");
+class Project extends Model_1.default {
+    constructor() {
+        super();
+        // this.addableRowNumber = this.#lastIndexNumber()
+        // //最初の入力時にはlastIdを0とする。
+        // this.lastId = this.addableRowNumber === 3 ? 0 : this.#getValue(this.addableRowNumber - 1, 1)
+        // this.willNewId = this.lastId + 1
+    }
+}
+exports["default"] = Project;
 
 
 /***/ }),
@@ -213,8 +267,9 @@ var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const main_1 = __webpack_require__(/*! @/main */ "./src/main.ts");
-__webpack_require__.g.onEdit = main_1.registerProjectRecord; // スプレッドシートの編集トリガーとしても使える
-__webpack_require__.g.fuga = main_1.registerProjectRecord;
+__webpack_require__.g.registerProjectRecord = main_1.registerProjectRecord;
+// global.registerScheduleRecord = registerScheduleRecord;
+// global.registerUserRecord = registerUserRecord;
 
 })();
 

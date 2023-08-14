@@ -1,20 +1,23 @@
-import { TableColumnNames, ProjectsTableColumnTypes } from "../types/table";
+// import { TableColumnNames } from "../types/table";
 import { ProjectsSheet } from "../sheets";
+// import { Store } from "./Store";
 
-export default class ProjectsModel {
+export default abstract class Model {
   initializationRowNumber = 3;
   public addableRowNumber: number
   public lastId: number
   public willNewId: number
+  // public store: Store
 
   constructor() {
+    // this.store = store
     this.addableRowNumber = this.#lastIndexNumber()
     //最初の入力時にはlastIdを0とする。
     this.lastId = this.addableRowNumber === 3 ? 0 : this.#getValue(this.addableRowNumber - 1, 1)
     this.willNewId = this.lastId + 1
   }
 
-  create( record: [string, string]) {
+  create(record: [string, string]) {
     const addRowNum = this.#lastIndexNumber()
     ProjectsSheet?.getRange(addRowNum, 1 , 1 , 6).setValues(
       [[
